@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "emitDeclarationOnly": true,
+    "declaration": true,
+    "declarationMap": true,
+    "esModuleInterop": true,
+    "lib": [
+      "ESNext"
+    ],
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "noUncheckedIndexedAccess": true,
+    "outDir": "dist",
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "ESNext",
+    "baseUrl": "./src",
+    "paths": {
+      "#structs": ["./structs"],
+      "#structs/*": ["./structs/*"],
+      "#utils": ["./utils"],
+      "#utils/*": ["./utils/*"],
+    }
+  }
+}

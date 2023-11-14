@@ -1,0 +1,11 @@
+dist/
+
+# NPM related
+node_modules/
+package-lock.json
+pnpm-lock.yaml
+bun.lockb
+yarn.lock
+
+# Necessary
+!**/.gitkeep
