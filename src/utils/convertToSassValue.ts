@@ -21,8 +21,7 @@ export function convertToSassValue<T extends any>(item: T, syntax: 'sass' | 'scs
     else depth++;
 
     const lines = ['('];
-    for (const k in item) {
-      const key = k as keyof T;
+    for (const key in item) {
       const value = item[key];
 
       lines.push(`${'  '.repeat(depth)}${String(key)}: ${convertToSassValue(value, syntax, depth)},`);

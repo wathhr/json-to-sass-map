@@ -1,21 +1,21 @@
 {
   "compilerOptions": {
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "skipLibCheck": true,
     "emitDeclarationOnly": true,
     "declaration": true,
     "declarationMap": true,
     "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "outFile": "dist/index.js",
+    "sourceMap": false,
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
     "lib": [
       "ESNext"
     ],
-    "module": "ESNext",
-    "moduleResolution": "Node",
-    "noUncheckedIndexedAccess": true,
-    "outDir": "dist",
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "sourceMap": true,
-    "strict": true,
-    "target": "ESNext",
     "baseUrl": "./src",
     "paths": {
       "#structs": ["./structs"],
@@ -23,5 +23,6 @@
       "#utils": ["./utils"],
       "#utils/*": ["./utils/*"],
     }
-  }
+  },
+  "files": ["./src/index.ts"]
 }

@@ -70,7 +70,9 @@ for (const file of values.input) {
     : (values.output + '-' + (basename(file).split('.')[0] ?? 'file'))) + '.' + syntax;
 
   console.log(`Converting "${file}" to "${output}"...`);
-  writeFile(output, objectToMap(json, syntax, values.name))
-    .catch(console.error)
+  writeFile(output, objectToMap(json, {
+    syntax,
+    name: values.name
+  })).catch(console.error)
     .then(() => console.log(`Converted "${file}" to "${output}" successfully.`));
 }

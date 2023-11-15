@@ -31,7 +31,7 @@ if (process.argv.includes('--bin')) builds.push({
   },
   minify: false,
   bundle: false,
-  sourcemap: false,
+  sourcemap: true,
   platform: 'node',
   format: 'esm',
   logLevel: 'info',
