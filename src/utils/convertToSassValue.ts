@@ -1,6 +1,6 @@
 import { color } from '#structs';
 import { is } from 'superstruct';
-import { convertColorToString } from './convertColorToString';
+import { convertColorToString } from './convertColorToString.js';
 
 export function convertToSassValue<T extends any>(item: T, syntax: 'sass' | 'scss', depth = 0): string {
   const type = typeof item;

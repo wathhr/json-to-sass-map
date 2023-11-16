@@ -1,16 +1,14 @@
 {
   "name": "@wathhr/json-to-sass-map",
   "author": "wathhr",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Converts JSON files to S[AC]SS maps",
   "license": "GPL-3.0-or-later",
   "type": "module",
   "scripts": {
-    "build": "node scripts/build.js --bin",
-    "build:bin": "node scripts/build.js --bin",
-    "build:lib": "node scripts/build.js",
-    "build:types": "tsc",
-    "prepublish": "npm run build:types && npm run build"
+    "build": "tsc && tsc-alias",
+    "build:watch": "concurrently --kill-others \"tsc -w\" \"tsc-alias -w\"",
+    "prepublish": "npm run build"
   },
   "dependencies": {
     "superstruct": "^1.0.3",
@@ -19,11 +17,14 @@
   "devDependencies": {
     "@types/node": "^20.9.0",
     "@types/to-regex-range": "^5.0.3",
+    "concurrently": "^8.2.2",
     "esbuild": "^0.19.5",
+    "tsc-alias": "^1.8.8",
     "typescript": "^5.2.2"
   },
   "bin": "dist/bin.js",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
     "./dist"
   ]

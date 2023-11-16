@@ -1,5 +1,5 @@
 import { is } from 'superstruct';
-import { convertColorToString } from './convertColorToString';
+import { convertColorToString } from './convertColorToString.js';
 import { color } from '#structs';
 
 export function convertToCssValue(item: any): string {

@@ -1,3 +1,3 @@
-export * from './convertColorToString';
-export * from './convertToCssValue';
-export * from './convertToSassValue';
+export * from './convertColorToString.js';
+export * from './convertToCssValue.js';
+export * from './convertToSassValue.js';
