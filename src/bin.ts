@@ -3,7 +3,7 @@
 
 import { parseArgs, ParseArgsConfig } from 'node:util';
 import { readFile, writeFile } from 'node:fs/promises';
-import { objectToMap } from './index.js'; // 🧌
+import { objectToMap, objectToProps } from './index.js';
 import type { ExtraOptionDataObject } from 'types';
 import { basename } from 'node:path';
 
@@ -21,10 +21,14 @@ export const options = {
     type: 'string',
     short: 'n',
   },
-  syntax: {
+  language: {
+    type: 'string',
+    short: 'l',
+  },
+  selector: {
     type: 'string',
     short: 's',
-  },
+  }
 } as const satisfies ParseArgsConfig['options'];
 
 export type OptionsType = typeof options;
@@ -36,9 +40,10 @@ const { values: args, positionals } = parseArgs({
 
 const defaults: ExtraOptionDataObject = {
   input: positionals,
-  output: args.output ?? args.name ?? 'map',
-  name: args.name ?? args.output ?? 'map',
-  syntax: 'scss',
+  output: 'out',
+  name: args.language === 'css' ? '' : 'map',
+  language: 'scss',
+  selector: ':root'
 };
 
 const values: typeof args = {
@@ -46,14 +51,16 @@ const values: typeof args = {
   ...args,
 };
 
+if (values.language === 'scss' && args.selector) console.warn(`The "--selector" option is ignored for "scss" syntax.`);
+
 if (
-  !values.syntax ||
-  !['sass', 'scss'].includes(values.syntax)
+  !values.language ||
+  !['css', 'sass', 'scss'].includes(values.language)
 ) throw new Error('Syntax needs to be either "sass" or "scss"');
 if (!values.input || values.input.length === 0) throw new Error('You need to specify at least one input file.');
 if (!values.output) throw new Error('You need to specify an output location.'); // i hate that i had to specify this
 
-const syntax = values.syntax as 'sass' | 'scss'; // i love typescript
+const language = values.language as 'css' | 'sass' | 'scss'; // i love typescript
 
 for (const file of values.input) {
   const json = await readFile(file)
@@ -67,12 +74,14 @@ for (const file of values.input) {
 
   const output = (values.input.length === 1
     ? values.output
-    : (values.output + '-' + (basename(file).split('.')[0] ?? 'file'))) + '.' + syntax;
+    : (values.output + '-' + (basename(file).split('.')[0] ?? 'file'))) + '.' + language;
 
   console.log(`Converting "${file}" to "${output}"...`);
-  writeFile(output, objectToMap(json, {
-    syntax,
-    name: values.name
-  })).catch(console.error)
+  const content = language === 'css'
+    ? objectToProps(json, { selector: values.selector, prefix: values.name })
+    : objectToMap(json, { syntax: language, name: values.name });
+
+  writeFile(output, content)
+    .catch(console.error)
     .then(() => console.log(`Converted "${file}" to "${output}" successfully.`));
 }
