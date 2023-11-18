@@ -1,7 +1,7 @@
 {
   "name": "@wathhr/json-to-sass-map",
   "author": "wathhr",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Converts JSON files to S[AC]SS maps",
   "license": "GPL-3.0-or-later",
   "type": "module",
