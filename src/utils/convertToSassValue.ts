@@ -9,11 +9,11 @@ export function convertToSassValue<T extends any>(item: T, syntax: 'sass' | 'scs
   // unsupported
   if (['symbol', 'undefined', 'function'].includes(type)) throw new Error(`Unsupported value: ${item}`);
 
-  // color
-  if (is(item, color)) return convertColorToString(item);
-
   // list
   if (Array.isArray(item)) return `(${item.map((i) => convertToSassValue(i, syntax, depth)).join(', ')}, )`;
+
+  // color
+  if (is(item, color)) return convertColorToString(item);
 
   // map
   if (type === 'object') {

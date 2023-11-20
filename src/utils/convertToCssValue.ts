@@ -8,6 +8,9 @@ export function convertToCssValue(item: any): string {
   // unsupported
   if (['symbol', 'undefined', 'function'].includes(type)) throw new Error(`Unsupported value: ${item}`);
 
+  // array
+  if (Array.isArray(item)) return `'${item.join(' ')}'`;
+
   // color
   if (is(item, color)) return convertColorToString(item);
 
