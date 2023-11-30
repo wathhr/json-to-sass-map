@@ -3,14 +3,8 @@
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "skipLibCheck": true,
-    // "emitDeclarationOnly": true,
-    "declaration": true,
-    "declarationMap": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
-    // "outFile": "dist/index.js",
-    "outDir": "dist",
-    "sourceMap": false,
     "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "Node",
@@ -19,14 +13,12 @@
     ],
     "baseUrl": "./src",
     "paths": {
+      "#": ["./"],
+      "#/*": ["./*"],
       "#structs": ["./structs/index.js"],
       "#structs/*": ["./structs/*.js"],
       "#utils": ["./utils/index.js"],
-      "#utils/*": ["./utils/*.js"],
+      "#utils/*": ["./utils/*.js"]
     }
-  },
-  "files": [
-    "./src/index.ts",
-    "./src/bin.ts"
-  ]
+  }
 }
